@@ -42,27 +42,20 @@ for x in year:
 				url_list.append(url + str(date) + page_name)
 
 
-# theoretically, should have a list of urls that we can now parse
-# what to do if page doesn't exist?
-
+#list of urls that we can now parse
 for item in url_list:
-	try:
-		r = requests.get(item)
-	except requests.exceptions.RequestException as e:    # This is the correct syntax
-		print "missing url"
-		print e
-		sys.exit(1)
-# for item in url_list:
-	scraper = cfscrape.create_scraper()
-	# html_content = scraper.get(item).content
-	html_content = scraper.get(r).content
-	soup = BeautifulSoup(html_content, "html.parser")
 
+	scraper = cfscrape.create_scraper() #gets past cloudflare
+	html_content = scraper.get(item)
+
+	soup = BeautifulSoup((html_content.content), "html.parser")
 	content = soup.find('div', attrs = {'class':'post-content article-content'}) #gets div
 
-	u'\u2019'.encode('utf8')
-	entry = content.text.strip() # strip() is used to remove starting and trailing  
-	print entry.encode('utf-8') #encode for ASCII characters
+	u'\u2019'.encode('utf8') #encode for ASCII characters
+	if content is not None: # if page exists, print
+		entry = content.text.strip() # strip() is used to remove starting and trailing  
+		print item
+		print entry.encode('utf-8') #encode for ASCII characters
 
 
 
