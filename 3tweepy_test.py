@@ -28,6 +28,7 @@ def get_all_tweets(screen_name):
     new_tweets = api.user_timeline(screen_name = screen_name,count=200)
     
     #save most recent tweets
+    # The method extend() appends the contents of seq to list.
     alltweets.extend(new_tweets)
     
     #save the id of the oldest tweet less one
@@ -48,7 +49,7 @@ def get_all_tweets(screen_name):
         print "...%s tweets downloaded so far" % (len(alltweets))
        
     #write tweet objects to JSON
-    file = open('girlposts.json', 'wb') 
+    file = open('slbedard.json', 'wb') 
     print "Writing tweet objects to JSON please wait..."
     for status in alltweets:
         json.dump(status._json,file,sort_keys = True,indent = 4)
@@ -59,4 +60,4 @@ def get_all_tweets(screen_name):
 
 if __name__ == '__main__':
     #pass in the username of the account you want to download
-    get_all_tweets("@girlposts")
+    get_all_tweets("@slbedard ")
