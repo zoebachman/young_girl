@@ -19,7 +19,7 @@ month_name = ["december", "november", "october", "september", "august", "july", 
 
 url_list = [] #create a list to hold all the urls
 
-# iterate through dates and generate urls
+iterate through dates and generate urls
 for x in year:
 	for y in month: #[actual number is y]
 		date = str(x) + "/" + str(y) + "/"
